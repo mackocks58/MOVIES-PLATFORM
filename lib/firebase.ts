@@ -13,17 +13,10 @@ const firebaseConfig = {
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 
-let app: FirebaseApp;
-let auth: Auth;
-let db: Database;
-let storage: FirebaseStorage;
-
-if (typeof window !== 'undefined' && !getApps().length) {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db = getDatabase(app);
-  storage = getStorage(app);
-}
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
+const db = getDatabase(app);
+const storage = getStorage(app);
 
 export { app, auth, db, storage };
 export { ref, set, get, push, update, onValue, off, remove, child } from 'firebase/database';
