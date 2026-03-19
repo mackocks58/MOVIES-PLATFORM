@@ -27,5 +27,5 @@ if (typeof window !== 'undefined' && !getApps().length) {
 
 export { app, auth, db, storage };
 export { ref, set, get, push, update, onValue, off, remove, child } from 'firebase/database';
-export { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User } from 'firebase/auth';
+export { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, type User } from 'firebase/auth';
 export { ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
