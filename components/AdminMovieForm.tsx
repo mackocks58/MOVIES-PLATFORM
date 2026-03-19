@@ -1,5 +1,5 @@
 'use client';
-import { Film, Upload, Loader2 } from 'lucide-react';
+import { Clapperboard, Upload, Loader2 } from 'lucide-react';
 
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -203,7 +203,7 @@ export function AdminMovieForm({ onSuccess }: AdminMovieFormProps) {
           </>
         ) : (
           <>
-            <Film className="w-5 h-5" />
+            <Clapperboard className="w-5 h-5" />
             Add movie
           </>
         )}
