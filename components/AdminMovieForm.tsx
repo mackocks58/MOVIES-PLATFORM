@@ -106,7 +106,7 @@ export function AdminMovieForm({ onSuccess }: AdminMovieFormProps) {
       onSubmit={handleSubmit}
       className="bg-dark-900/80 border border-dark-700/50 rounded-2xl p-8"
     >
-      <h3 className="text-lg font-semibold mb-6">Add new movie</h3>
+      <h3 className="text-lg font-semibold mb-6">Add new movie </h3>
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label className="block text-sm text-dark-400 mb-2">Title</label>
