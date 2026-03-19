@@ -1,9 +1,9 @@
 'use client';
-import { Film } from "lucide-react"
+import { Film, Upload, Loader2 } from "lucide-react"
 
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, Loader2 } from 'lucide-react';
+
 import { db, storage, storageRef, uploadBytesResumable, getDownloadURL } from '@/lib/firebase';
 import { ref, push, set } from 'firebase/database';
 import { auth } from '@/lib/firebase';
