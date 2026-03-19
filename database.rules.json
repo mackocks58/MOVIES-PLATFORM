@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "movies": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email != null && auth.token.email.toLowerCase().includes('admin')"
+    },
+    "seasons": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email != null && auth.token.email.toLowerCase().includes('admin')"
+    },
+    "payments": {
+      "$userId": {
+        ".read": "auth != null && auth.uid == $userId",
+        ".write": false
+      }
+    },
+    "paymentRecords": {
+      ".read": false,
+      ".write": false
+    },
+    "admins": {
+      ".read": "auth != null",
+      ".write": false
+    }
+  }
+}
