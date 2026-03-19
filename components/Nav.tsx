@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Film, User, LogOut } from 'lucide-react';
 import { useAuth } from './AuthProvider';
-import { signOut } from '@/lib/firebase';
+import { signOut, auth } from '@/lib/firebase';
 
 export function Nav() {
   const pathname = usePathname();

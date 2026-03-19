@@ -1,5 +1,5 @@
 'use client';
-import { Film, Upload, Loader2 } from "lucide-react"
+import { Film, Upload, Loader2 } from 'lucide-react';
 
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
