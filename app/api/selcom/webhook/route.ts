@@ -27,15 +27,23 @@ export async function POST(req: NextRequest) {
     const db = getAdminDb();
     const paymentsRef = db.ref(`payments/${userId}`);
     const snapshot = await paymentsRef.once('value');
-    const existing = snapshot.val() || { movieIds: [], lastUpdated: 0 };
-    const movieIds = Array.isArray(existing.movieIds) ? [...existing.movieIds] : [];
-    if (!movieIds.includes(movieId)) {
-      movieIds.push(movieId);
+    const existing = snapshot.val() || { movieIds: [], credits: 0, lastUpdated: 0 };
+    
+    let movieIds = Array.isArray(existing.movieIds) ? [...existing.movieIds] : [];
+    let credits = existing.credits || 0;
+
+    if (movieId === 'credits') {
+      credits += 10;
+    } else {
+      if (!movieIds.includes(movieId)) {
+        movieIds.push(movieId);
+      }
     }
 
     await paymentsRef.set({
       userId,
       movieIds,
+      credits,
       lastUpdated: Date.now(),
     });
 

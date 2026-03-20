@@ -17,51 +17,61 @@ export function MovieCard({ movie, index, hasPaid }: MovieCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
+      whileHover={{ y: -8 }}
       className="group"
     >
       <Link href={`/watch/${movie.id}`}>
-        <div className="relative rounded-xl overflow-hidden bg-dark-800/50 border border-dark-700/50 hover:border-brand-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/10">
+        <div className="relative rounded-[2rem] overflow-hidden bg-dark-900 border border-dark-800 transition-all duration-500 group-hover:border-brand-500/50 group-hover:shadow-[0_20px_50px_rgba(235,117,29,0.15)]">
           <div className="aspect-[2/3] relative">
             <Image
               src={poster}
               alt={movie.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              priority={index < 4}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent opacity-80" />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
-              {hasPaid ? (
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-16 h-16 rounded-full bg-brand-500 flex items-center justify-center"
-                >
-                  <Play className="w-8 h-8 text-white fill-white ml-1" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center gap-2 px-4 py-2 rounded-lg bg-dark-900/90 border border-brand-500/50"
-                >
-                  <Lock className="w-10 h-10 text-brand-500" />
-                  <span className="text-sm font-medium text-white">Pay to Unlock</span>
-                </motion.div>
-              )}
+            
+            {/* Glossy overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Status Badge */}
+            <div className="absolute top-4 right-4 z-10 shrink-0">
+               {hasPaid ? (
+                 <div className="px-3 py-1 rounded-full bg-emerald-500/90 backdrop-blur-md text-[10px] font-black text-white uppercase tracking-widest shadow-lg">
+                   Unlocked
+                 </div>
+               ) : (
+                 <div className="px-3 py-1 rounded-full bg-brand-500/90 backdrop-blur-md text-[10px] font-black text-white uppercase tracking-widest shadow-lg flex items-center gap-1">
+                   <Lock className="w-2.5 h-2.5" />
+                   Premium
+                 </div>
+               )}
             </div>
-            {!hasPaid && (
-              <div className="absolute top-3 right-3 px-2 py-1 rounded-md bg-brand-500/90 text-xs font-bold text-white">
-                TZS {movie.price?.toLocaleString()}
-              </div>
-            )}
+
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:backdrop-blur-[2px]">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-16 h-16 rounded-full bg-brand-500 flex items-center justify-center shadow-2xl shadow-brand-500/50"
+              >
+                <Play className="w-8 h-8 text-white fill-white ml-1" />
+              </motion.div>
+            </div>
           </div>
-          <div className="p-3">
-            <h3 className="font-semibold text-white truncate group-hover:text-brand-400 transition-colors">
+          
+          <div className="p-5 bg-gradient-to-b from-dark-900 to-black">
+            <h3 className="font-bold text-white text-lg truncate group-hover:text-brand-500 transition-colors duration-300">
               {movie.title}
             </h3>
-            <p className="text-xs text-dark-400 truncate">{movie.category}</p>
+            <div className="flex items-center justify-between mt-2">
+               <span className="text-xs font-medium text-dark-500 uppercase tracking-wider">{movie.category}</span>
+               {!hasPaid && <span className="text-sm font-black text-brand-400">1 Credit</span>}
+            </div>
           </div>
         </div>
       </Link>
